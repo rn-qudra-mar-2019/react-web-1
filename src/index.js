@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { nfapply } from "q";
 
 const root = document.getElementById("root");
 
@@ -37,22 +38,38 @@ function addLiToUl(text) {
 // addLiToUl('Gmail')
 // addLiToUl('Twitter')
 
-const div2 = React.createElement(
-  "ul",
-  null,
-  ["Google", "Facebook", "Twitter", "LinkedIn"].map(x => {
-    return React.createElement("li", null, [
-      React.createElement(
-        "a",
-        { href: "https://google.com" },
-        React.createElement("b", null, x)
-      ),
-      React.createElement("div", null, [
-        React.createElement("button", { onClick: () => alert("Edit") }, "Edit"),
-        React.createElement("button", { onClick: () => alert("Delete") }, "X")
-      ])
-    ]);
-  })
-);
+// Uppercase first letter for Component name
+const Div2 = (props) => <ul style={ {fontSize: props.size, backgroundColor: props.bgColor} }>
+{
+  ["Google", "Facebook", "Twitter", "LinkedIn"]
+    .map(x => {
+      return (
+        <li>
+          <a href="https://google.com" style={{color: props.textColor}}>
+            <b>{ x }</b>
+          </a>
+          <div>
+            <button style={ { fontFamily: props.btnFont } } onClick={() => alert('Edit')}>Edit</button>
+            <button style={ { fontFamily: props.btnFont } } onClick={() => alert('Delete')}>X</button>
+          </div>
+        </li>
+      )
+    })
+    }</ul>;
 
-ReactDOM.render(div2, root);
+    // return React.createElement("li", null, [
+    //   React.createElement(
+    //     "a",
+    //     { href: "https://google.com" },
+    //     React.createElement("b", null, x)
+    //   ),
+    //   React.createElement("div", null, [
+    //     React.createElement("button", { onClick: () => alert("Edit") }, "Edit"),
+    //     React.createElement("button", { onClick: () => alert("Delete") }, "X")
+    //   ])
+    // ]);
+//   })
+// );
+
+// ReactDOM.render(Div2({btnFont: 'monospace', bgColor: 'yellow', size: 25}), root);
+ReactDOM.render(<Div2 btnFont="monospace" bgColor="yellow" size={25}></Div2>, root);
