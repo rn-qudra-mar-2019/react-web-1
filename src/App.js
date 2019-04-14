@@ -1,27 +1,33 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+
+const App2 = () => (
+  <div>
+    <ul>
+      {["Frya", "Dashti"].map(s => (
+        <li>Hello {s}</li>
+      ))}
+    </ul>
+  </div>
+);
 
 class App extends Component {
+  
+  render2() {
+    return <div>I am render 2</div>
+  }
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    let students = ["Frya", "Dashti"];
+
+    return <div>
+      <ul>
+        {
+          students.map(s => <li>Hello, {s}</li>)
+        }
+      </ul>
+    </div>;
   }
 }
 
