@@ -1,33 +1,23 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
 
-const App2 = () => (
-  <div>
-    <ul>
-      {["Frya", "Dashti"].map(s => (
-        <li>Hello {s}</li>
-      ))}
-    </ul>
-  </div>
-);
-
-class App extends Component {
-  
-  render2() {
-    return <div>I am render 2</div>
-  }
+class App extends Component
+{
+  students = [
+    {name: 'Mohammed', email: 'mohammed@gmail.com'},
+    {name: 'Frya', email: 'frya@gmail.com'},
+    {name: 'Ramzan', email: 'ramazan@gmail.com'},
+    {name: 'Janger', email: 'janger@gmail.com'},
+    {name: 'Bassam', email: 'bassam@gmail.com'},
+  ];
 
   render() {
-    let students = ["Frya", "Dashti"];
-
-    return <div>
+    return (
       <ul>
         {
-          students.map(s => <li>Hello, {s}</li>)
+          this.students.map(s => <li> <b>{s.name}</b>: {s.email}</li>)
         }
       </ul>
-    </div>;
+    );
   }
 }
 
