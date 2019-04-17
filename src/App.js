@@ -1,66 +1,47 @@
 import React, { Component } from "react";
 
 class App extends Component {
-
-  updateSomething() {
-
-    this.setState({
-      count: this.state.count + 1,
-
-      students: [
-        { name: "Ramazan", email: "ramazan@gmail.com" },
-        ...this.state.students,
-      ]
-    }, () => {
-      console.log('After update', this.state.count)
-    });
-
-    this.setState({
-      count: this.state.count + 1
-    }, () => {
-      
-      console.log('After update 2', this.state.count)
-    })
-
-    this.setState({
-      count: this.state.count + 1
-    }, () => {
-      console.log('After update 3', this.state.count)
-    })
-
-    this.setState({
-      count: this.state.count + 1
-    }, () => {
-      
-      console.log('After update 4', this.state.count)
-    })
-
-    console.log('Next line')
-  }
-
   state = {
+    name: "Abdullah",
     students: [
       { name: "Mohammed", email: "mohammed@gmail.com" },
-      { name: "Frya", email: "frya@gmail.com" },
-      { name: "Janger", email: "janger@gmail.com" },
-      { name: "Bassam", email: "bassam@gmail.com" }
-    ],
-    count: 0
+      { name: "Dashti", email: "dashti@gmail.com" },
+      { name: "Basam", email: "basam@gmail.com" }
+    ]
+  };
+
+  addNewStudent = () => {
+    
+    const newStudent = { 
+      name: this.state.name,
+      email: this.state.name + "@gmail.com"
+    }
+
+    this.setState({
+      students: [
+        ...this.state.students,
+        newStudent
+      ],
+      name: ""
+    });
   };
 
   render() {
-    console.log('rendering')
-
     return (
       <ul>
-        <button onClick={this.updateSomething.bind(this)}>Update it {this.state.count}</button>
-        <div>
-        {this.state.count}
-        </div>
-        {this.state.students.map(s => (
+        <input
+          value={this.state.name}
+          onChange={e =>
+            this.setState({ name: e.target.value })
+          }
+        />
+        <button onClick={this.addNewStudent}>
+          Add
+        </button>
+        <div>The count of students is {0}</div>
+        {this.state.students.map(x => (
           <li>
-            {" "}
-            <b>{s.name}</b>: {s.email}
+            {x.name.toUpperCase()}, {x.email}
           </li>
         ))}
       </ul>
