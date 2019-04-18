@@ -1,14 +1,15 @@
 import React, { Component } from "react";
+import List from "./List";
 
 const style = {
   btn: {
-    backgroundColor: 'blue',
-    borderStyle: 'solid',
-    borderRadius: '.5rem',
-    padding: '.5rem',
-    color: '#fff'
+    backgroundColor: "blue",
+    borderStyle: "solid",
+    borderRadius: ".5rem",
+    padding: ".5rem",
+    color: "#fff"
   }
-}
+};
 
 class App extends Component {
   state = {
@@ -20,9 +21,19 @@ class App extends Component {
     if (this.state.studentName === "") return;
 
     this.setState({
-      students: [...this.state.students, { name: this.state.studentName }],
+      students: [
+        ...this.state.students,
+        {
+          name: this.state.studentName,
+          email: this.state.studentName + "@gmail"
+        }
+      ],
       studentName: ""
     });
+  };
+
+  showInfoAboutEvent = e => {
+    console.log(e);
   };
 
   render() {
@@ -38,13 +49,15 @@ class App extends Component {
               })
             }
           />
-          <button onClick={this.addStudent} disabled={!this.state.studentName}>Add Student</button>
+          <button onClick={this.addStudent} disabled={!this.state.studentName}>
+            Add Student
+          </button>
         </div>
-        <ul>
-          {this.state.students.map(s => (
-            <li>{s.name}</li>
-          ))}
-        </ul>
+        <h1>Student names</h1>
+        <List data={this.state.students} />
+
+        <h1>Students Emails</h1>
+        <List displayKey="email" data={this.state.students} />
       </div>
     );
   }
