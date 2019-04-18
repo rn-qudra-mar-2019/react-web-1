@@ -1,50 +1,51 @@
 import React, { Component } from "react";
 
+const style = {
+  btn: {
+    backgroundColor: 'blue',
+    borderStyle: 'solid',
+    borderRadius: '.5rem',
+    padding: '.5rem',
+    color: '#fff'
+  }
+}
+
 class App extends Component {
   state = {
-    name: "Abdullah",
-    students: [
-      { name: "Mohammed", email: "mohammed@gmail.com" },
-      { name: "Dashti", email: "dashti@gmail.com" },
-      { name: "Basam", email: "basam@gmail.com" }
-    ]
+    studentName: "",
+    students: []
   };
 
-  addNewStudent = () => {
-    
-    const newStudent = { 
-      name: this.state.name,
-      email: this.state.name + "@gmail.com"
-    }
+  addStudent = () => {
+    if (this.state.studentName === "") return;
 
     this.setState({
-      students: [
-        ...this.state.students,
-        newStudent
-      ],
-      name: ""
+      students: [...this.state.students, { name: this.state.studentName }],
+      studentName: ""
     });
   };
 
   render() {
     return (
-      <ul>
-        <input
-          value={this.state.name}
-          onChange={e =>
-            this.setState({ name: e.target.value })
-          }
-        />
-        <button onClick={this.addNewStudent}>
-          Add
-        </button>
-        <div>The count of students is {0}</div>
-        {this.state.students.map(x => (
-          <li>
-            {x.name.toUpperCase()}, {x.email}
-          </li>
-        ))}
-      </ul>
+      <div>
+        <div>
+          <input
+            value={this.state.studentName}
+            onKeyPress={e => e.which === 13 && this.addStudent()}
+            onChange={e =>
+              this.setState({
+                studentName: e.target.value
+              })
+            }
+          />
+          <button onClick={this.addStudent} disabled={!this.state.studentName}>Add Student</button>
+        </div>
+        <ul>
+          {this.state.students.map(s => (
+            <li>{s.name}</li>
+          ))}
+        </ul>
+      </div>
     );
   }
 }
