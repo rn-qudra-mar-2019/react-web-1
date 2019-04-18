@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import List from "./List";
+import AddHeader from "./AddHeader"
 
 const style = {
   btn: {
@@ -13,22 +14,20 @@ const style = {
 
 class App extends Component {
   state = {
-    studentName: "",
     students: []
   };
 
-  addStudent = () => {
-    if (this.state.studentName === "") return;
+  addStudent = (name) => {
+    if (name === "") return;
 
     this.setState({
       students: [
         ...this.state.students,
         {
-          name: this.state.studentName,
-          email: this.state.studentName + "@gmail"
+          name: name,
+          email: name + "@gmail"
         }
       ],
-      studentName: ""
     });
   };
 
@@ -40,18 +39,7 @@ class App extends Component {
     return (
       <div>
         <div>
-          <input
-            value={this.state.studentName}
-            onKeyPress={e => e.which === 13 && this.addStudent()}
-            onChange={e =>
-              this.setState({
-                studentName: e.target.value
-              })
-            }
-          />
-          <button onClick={this.addStudent} disabled={!this.state.studentName}>
-            Add Student
-          </button>
+          <AddHeader onAddItem={this.addStudent}/>
         </div>
         <h1>Student names</h1>
         <List data={this.state.students} />
