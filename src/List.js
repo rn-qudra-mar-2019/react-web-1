@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 
-export default ({displayKey = 'name', data = []}) => {
-
+export default ({ displayKey = "name", children = null, data = [] }) => {
   return (
-    <ul>
-      {data.map(s => (
-        <li>{s[displayKey]}</li>
-      ))}
-    </ul>
+    <div>
+      {children}
+      <ul>
+        {data.map(s => (
+          <li>{s[displayKey]}</li>
+        ))}
+      </ul>
+    </div>
   );
 };

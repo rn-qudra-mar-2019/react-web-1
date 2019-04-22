@@ -15,6 +15,9 @@ export default class AddHeader extends Component {
   render() {
     return (
       <>
+        <div>
+          {this.props.children}
+        </div>
         <input
           value={this.state.studentName}
           onKeyPress={e => e.which === 13 && this.addItem()}
@@ -33,5 +36,6 @@ export default class AddHeader extends Component {
 }
 
 AddHeader.defaultProps = {
-  onAddItem: () => {}
+  onAddItem: () => {},
+  children: 'Add new student'
 }
